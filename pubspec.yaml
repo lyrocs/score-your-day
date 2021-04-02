@@ -19,6 +19,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
 
 flutter:
   uses-material-design: true
@@ -29,3 +35,4 @@ flutter:
     - assets/emojis/happy.png
     - assets/emojis/shy.png
     - assets/emojis/love.png
+    - assets/icon/icon.png
