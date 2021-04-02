@@ -1,0 +1,31 @@
+name: score_your_day
+description: A new Flutter project.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sembast: ^3.0.0+4
+  path_provider: ^2.0.1
+  intl: ^0.17.0
+  rxdart: ^0.22.0
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/emojis/angry.png
+    - assets/emojis/confused.png
+    - assets/emojis/sad.png
+    - assets/emojis/happy.png
+    - assets/emojis/shy.png
+    - assets/emojis/love.png
