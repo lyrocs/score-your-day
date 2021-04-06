@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:score_your_day/bloc/score_bloc.dart';
+import 'package:intl/intl.dart';
 
 class ScorePage extends StatefulWidget {
   ScorePage({Key key}) : super(key: key);
@@ -8,9 +9,21 @@ class ScorePage extends StatefulWidget {
 }
 
 class _ScorePageState extends State<ScorePage> {
-  var _score = scoreBloc.scoreSelected.score;
-  var _comment = scoreBloc.scoreSelected.comment;
-  var _date = scoreBloc.scoreSelected.date;
+  var _score;
+  var _comment;
+  var _date;
+
+  initValues() {
+    _score = scoreBloc.scoreSelected.score;
+    _comment = scoreBloc.scoreSelected.comment;
+    _date = scoreBloc.scoreSelected.date;
+  }
+
+  @override
+  void initState() {
+    initValues();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +51,31 @@ class _ScorePageState extends State<ScorePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [Text('How is your day ?')],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () async {
+                      await scoreBloc.changeSelectedDate(-1);
+                      initValues();
+                      setState(() {});
+                    },
+                    child: Icon(Icons.chevron_left),
+                  ),
+                  Text(DateFormat('d LLLL y')
+                    .format(DateTime.parse(_date))
+                    .toString()
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      await scoreBloc.changeSelectedDate(1);
+                      initValues();
+                      setState(() {});
+                    },
+                    child: Icon(Icons.chevron_right),
+                  ),
+                ],
               ),
               Padding(padding: EdgeInsets.all(30.0)),
               Row(

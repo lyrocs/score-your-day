@@ -24,6 +24,23 @@ class Repository {
     return result;
   }
 
+  Future<Score> fetchOneByDate(date) async {
+    var dir = await getApplicationDocumentsDirectory();
+    await dir.create(recursive: true);
+    var dbPath = join(dir.path, 'my_database.db');
+    var db = await databaseFactoryIo.openDatabase(dbPath);
+    var store = intMapStoreFactory.store();
+    var element = await store.findFirst(db,
+        finder: Finder(filter: Filter.equals('date', date)));
+
+    if (element == null) {
+      return null;
+    }
+    Score result = new Score(element['date'], element['score'], element['comment']);
+    return result;
+  }
+
+
   Future<bool> saveScore(date, score, comment) async {
     var dir = await getApplicationDocumentsDirectory();
     await dir.create(recursive: true);

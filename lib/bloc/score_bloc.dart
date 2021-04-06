@@ -34,6 +34,24 @@ class ScoreBloc {
     return _repository.saveScore(date, score, comment);
   }
 
+  changeSelectedDate(int diffDay) async {
+    var currentDate = DateTime.parse(_scoreSelected.date);
+    var previousDate;
+    if (diffDay > 0) {
+      previousDate = currentDate.add(const Duration(days: 1)).toString().substring(0, 10);
+    } else if (diffDay < 0) {
+      previousDate = currentDate.subtract(const Duration(days: 1)).toString().substring(0, 10);
+    }
+
+    Score previousScore = await _repository.fetchOneByDate(previousDate);
+    print(previousScore);
+    if (previousScore != null) {
+      _scoreSelected = previousScore;
+    } else {
+      _scoreSelected = new Score(previousDate.toString().substring(0, 10), 60.0, '');
+    }
+  }
+
 
   getColor(value) {
     if (value == 0.0) {
