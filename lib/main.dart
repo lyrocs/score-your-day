@@ -13,6 +13,7 @@ class ScoreYourDay extends StatelessWidget {
     return MaterialApp(
       title: 'My app test',
       home: HomePage(),
+      debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder>{
         '/home': (context) => Home(),
         '/score': (context) => ScorePage(),
